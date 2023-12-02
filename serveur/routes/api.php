@@ -11,7 +11,8 @@ use App\Http\Controllers\PartenaireController;
 use App\Http\Controllers\PreferenceController;
 use App\Http\Controllers\SceneController;
 use App\Http\Controllers\UtilisateurController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Authentification;
+use App\Http\Controllers\GeolocationController;
 
 
 Route::resources([
@@ -24,6 +25,7 @@ Route::resources([
     'preferences' => PreferenceController::class,
     'scenes' => SceneController::class,
     'utilisateurs' => UtilisateurController::class,
+    'geo' => GeolocationController::class,
     
 ]);
 
