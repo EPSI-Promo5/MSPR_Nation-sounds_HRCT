@@ -1,27 +1,23 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Header from './composants/Header';
-import './App.css';
-import Footer from './composants/Footer';
-import ArtistesDetails from './pages/ArtisteDetails';
-import HomePage from './pages/HomePage';
-import ArtistesPage from './pages/LineUp';
-
+import EventList from './composants/EventList';
+import EventForm from './composants/EventForm';
+import ArtistList from './composants/ArtistList';
+import ArtistForm from './composants/ArtistForm';
 
 const App = () => {
   return (
     <Router>
-      <Header />
-     
+      <ul>
+        <li><Link to="/events">Événements</Link></li>
+        <li><Link to="/artists">Artistes</Link></li>
+      </ul>
       <Routes>
-      <Route path="/" element={<HomePage/>} />
-      <Route path="/LineUp" element={<ArtistesPage/>} />
-      <Route path="/ArtisteDetails" element={<ArtistesDetails/>} />
+        <Route path="/events" element={<EventList />} />
+        <Route path="/events/add" element={<EventForm />} />
+        <Route path="/artists" element={<ArtistList />} />
+        <Route path="/artists/add" element={<ArtistForm />} />
       </Routes>
-      
-      
-      
-      <Footer />
     </Router>
   );
 };
