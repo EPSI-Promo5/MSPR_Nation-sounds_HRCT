@@ -10,30 +10,31 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+
 /**
- * Class Scene
+ * Class PointsInteret
  * 
  * @property int $id
- * @property string $Nom
  * @property string $Type
+ * @property string $Nom
  * @property int $Id_lieu
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
  * @package App\Models
  */
-class Scene extends Model
+class PointsInteret extends Model
 {
 	use HasFactory;
-	protected $table = 'scene';
+	protected $table = 'points_interets';
 
 	protected $casts = [
 		'Id_lieu' => 'int'
 	];
 
 	protected $fillable = [
-		'Nom',
 		'Type',
+		'Nom',
 		'Id_lieu'
 	];
 }
