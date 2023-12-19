@@ -1,23 +1,24 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\Partenaire;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Partenaire>
- */
+
 class PartenaireFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Partenaire::class;
+
     public function definition(): array
     {
         return [
-            //
+            
+            'Id_concert' => $this->faker->randomNumber(),
+            'Catégories' => $this->faker->name,
+            'Nom' => $this->faker->name,
+            'Logo' => $this->faker->randomNumber(),
+            'Url' => $this->faker->url,
+
         ];
     }
 }

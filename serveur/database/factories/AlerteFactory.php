@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Factories;
+use App\Models\Alerte;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -9,15 +10,18 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class AlerteFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Alerte::class;
+
     public function definition(): array
     {
         return [
-            //
+            
+            'Titre' => $this->faker->sentence,
+            'Type' => $this->faker->word,
+            'Texte' => $this->faker->paragraph,
+
         ];
     }
 }
+
+

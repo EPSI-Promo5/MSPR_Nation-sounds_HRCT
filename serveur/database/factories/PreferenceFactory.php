@@ -1,23 +1,23 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\Preference;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Preference>
- */
+
 class PreferenceFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Preference::class;
+
     public function definition(): array
     {
         return [
-            //
+            
+            'Theme' => $this->faker->word,
+            'Genre' => $this->faker->word,
+            'Notification' => $this->faker->word,
+            'Id_user' => $this->faker->randomNumber(),
+
         ];
     }
 }

@@ -11,28 +11,36 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * Class Lieu
+ * Class PointsInterest
  * 
- * @property int $id
+ * @property int $Id
+ * @property string $Type
+ * @property string $Nom
+ * @property int $Id_lieu
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property float|null $latitude
- * @property float|null $longitude
+ * 
+ * @property Lieu $lieu
  *
  * @package App\Models
  */
-class Lieu extends Model
+class PointsInterets extends Model
 {
 	use HasFactory;
-	protected $table = 'lieu';
+	protected $table = 'points_interets';
 
 	protected $casts = [
-		'latitude' => 'float',
-		'longitude' => 'float'
+		'Id_lieu' => 'int'
 	];
 
 	protected $fillable = [
-		'latitude',
-		'longitude'
+		'Type',
+		'Nom',
+		'Id_lieu'
 	];
+
+	public function lieu()
+	{
+		return $this->belongsTo(Lieu::class, 'Id_lieu');
+	}
 }

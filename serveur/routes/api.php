@@ -8,13 +8,17 @@ use App\Http\Controllers\ConcertController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\LieuController;
 use App\Http\Controllers\PartenaireController;
+use App\Http\Controllers\PointsInteretsController;
 use App\Http\Controllers\PreferenceController;
 use App\Http\Controllers\SceneController;
 use App\Http\Controllers\UtilisateurController;
-use App\Http\Controllers\Authentification;
+use App\Http\Controllers\WordpressController;
 use App\Http\Controllers\GeolocationController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
 
-//Routes CRUD modèle Eloquent Laravel
+
+//Routes pour les contrôlleurs
 Route::resources([
     'alertes' => AlerteController::class,
     'commentaires' => CommentaireController::class,
@@ -22,6 +26,7 @@ Route::resources([
     'genres' => GenreController::class,
     'lieux' => LieuController::class,
     'partenaires' => PartenaireController::class,
+    'pointsinterets' => PointsInteretsController::class,
     'preferences' => PreferenceController::class,
     'scenes' => SceneController::class,
     'utilisateurs' => UtilisateurController::class,
@@ -29,13 +34,18 @@ Route::resources([
     
 ]);
 
-//Routes Wordpress
+// Routes d'authentification
+Route::post('/register', [RegisterController::class, 'register']);
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
+//Route pour le contrôleur Wordpress
 Route::prefix('wordpress')->group(function () {
     Route::get('/posts', 'WordPressController@getPosts');
 });
 
 
-//Route Middleware
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

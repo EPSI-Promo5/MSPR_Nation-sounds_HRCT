@@ -1,7 +1,6 @@
 <?php
 
 namespace Tests\Feature;
-
 use App\Models\Utilisateur;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;

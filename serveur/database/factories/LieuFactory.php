@@ -1,23 +1,21 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\Lieu;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Lieu>
- */
+
 class LieuFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Lieu::class;
+
     public function definition(): array
     {
         return [
-            //
+            
+            'latitude' => $this->faker->latitude,
+            'longitude' => $this->faker->longitude,
+
         ];
     }
 }

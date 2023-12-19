@@ -14,12 +14,12 @@ class RegisterControllerTest extends TestCase
 
     public function test_register_user()
     {
-        $nom = $this->faker->name;
+        $name = $this->faker->name;
         $email = $this->faker->unique()->safeEmail;
         $password = $this->faker->password(8);
 
         $response = $this->json('POST', '/api/register', [
-            'nom' => $nom,
+            'name' => $name,
             'email' => $email,
             'password' => $password,
         ]);
@@ -30,7 +30,7 @@ class RegisterControllerTest extends TestCase
             ]);
 
         $this->assertDatabaseHas('utilisateurs', [
-            'nom' => $nom,
+            'name' => $name,
             'email' => $email,
         ]);
     }

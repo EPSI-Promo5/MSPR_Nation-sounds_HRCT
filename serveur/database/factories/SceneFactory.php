@@ -2,22 +2,22 @@
 
 namespace Database\Factories;
 
+use App\Models\Scene;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Scene>
- */
+
 class SceneFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Scene::class;
+
     public function definition(): array
     {
         return [
-            //
+
+            'Nom' => $this->faker->name,
+            'Type' => $this->faker->name,
+            'Id_lieu' => $this->faker->randomNumber(),
+
         ];
     }
 }
