@@ -25,7 +25,8 @@ class LieuController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'localisation_gps' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
             
         ]);
 
@@ -40,7 +41,8 @@ class LieuController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'localisation_gps' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
         ]);
 
         if ($validator->fails()) {
