@@ -1,36 +1,27 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AlerteController;
-use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\ConcertController;
-use App\Http\Controllers\GenreController;
-use App\Http\Controllers\LieuController;
-use App\Http\Controllers\PartenaireController;
-use App\Http\Controllers\PreferenceController;
-use App\Http\Controllers\SceneController;
-use App\Http\Controllers\UtilisateurController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ArtistController;
+
+// Route pour récupérer tous les concerts
+Route::get('/concerts', [ConcertController::class, 'index']);
+
+// Route pour créer un nouveau concert
+Route::post('/concerts', [ConcertController::class, 'store']);
+
+// Route pour récupérer un concert par son ID
+Route::get('/concerts/{id}', [ConcertController::class, 'show']);
+
+// Route pour mettre à jour un concert existant
+Route::put('/concerts/{id}', [ConcertController::class, 'update']);
+
+// Route pour supprimer un concert existant
+Route::delete('/concerts/{id}', [ConcertController::class, 'destroy']);
+
+// Route pour récupérer tous les artistes
+Route::get('/artists', [ArtistController::class, 'index']);
 
 
-Route::resources([
-    'alertes' => AlerteController::class,
-    'commentaires' => CommentaireController::class,
-    'concerts' => ConcertController::class,
-    'genres' => GenreController::class,
-    'lieux' => LieuController::class,
-    'partenaires' => PartenaireController::class,
-    'preferences' => PreferenceController::class,
-    'scenes' => SceneController::class,
-    'utilisateurs' => UtilisateurController::class,
-    
-]);
-
-
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
+// Autres routes...
 
