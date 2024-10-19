@@ -1,63 +1,42 @@
 <?php
 
-/**
- * Created by Reliese Model.
- */
-
 namespace App\Models;
 
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Concert
  * 
- * @property int $ID
+ * @property int $id
  * @property string $Groupe
- * @property int $Horaires
- * @property string $Scene
+ * @property string $Duree
+ * @property string $Horaire
+ * @property int $scene_id
  * @property string $Descriptif
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property int|null $Id_lieu
  * 
- * @property Lieu|null $lieu
- * @property Collection|Genre[] $genres
- * @property Collection|Partenaire[] $partenaires
+ * @property Scene|null $scene
  *
  * @package App\Models
  */
 class Concert extends Model
 {
-	protected $table = 'concert';
-	protected $primaryKey = 'ID';
+    protected $table = 'concert'; // Assurez-vous que le nom de table est correct
+    protected $primaryKey = 'id'; // Assurez-vous que la clé primaire est correcte
 
-	protected $casts = [
-		'Horaires' => 'int',
-		'Id_lieu' => 'int'
-	];
+    protected $casts = [
+        'scene_id' => 'int'
+    ];
 
-	protected $fillable = [
-		'Groupe',
-		'Horaires',
-		'Scene',
-		'Descriptif',
-		'Id_lieu'
-	];
+    protected $fillable = [
+        'Groupe',
+        'Duree',
+        'Horaire',
+        'scene_id',
+        'Descriptif'
+    ];
 
-	public function lieu()
-	{
-		return $this->belongsTo(Lieu::class, 'Id_lieu');
-	}
-
-	public function genres()
-	{
-		return $this->hasMany(Genre::class, 'Id_concert');
-	}
-
-	public function partenaires()
-	{
-		return $this->hasMany(Partenaire::class, 'Id_concert');
-	}
+    public function scene()
+    {
+        return $this->belongsTo(Scene::class, 'scene_id');
+    }
 }

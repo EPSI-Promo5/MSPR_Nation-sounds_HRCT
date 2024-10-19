@@ -4,81 +4,79 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Concert;
+use Illuminate\Support\Facades\Validator;
 
 class ConcertController extends Controller
 {
+    // Get all concert
     public function index()
     {
         $concerts = Concert::all();
         return response()->json($concerts);
     }
-    
 
+    // Get concert by ID
     public function show($id)
     {
-        // Récupérer un concert spécifique par son ID depuis la base de données
         $concert = Concert::find($id);
-
-        // Retourner la vue avec les détails du concert
-        return view('concerts.show', ['concert' => $concert]);
+        if (!$concert) {
+            return response()->json(['message' => 'Concert not found'], 404);
+        }
+        return response()->json($concert);
     }
 
-    public function create()
+    // Create Concert
+    public function store(Request $request)
     {
-        // Afficher le formulaire de création d'un nouveau concert
-        return view('concerts.create');
-    }
-
-public function store(Request $request)
-{
-    // Valider les données du formulaire
-    $request->validate([
-        'groupe' => 'required',
-        'horaires' => 'required',
-        'scene' => 'required',
-        'descriptif' => 'required',
-    ]);
-
-    // Créer un nouveau concert dans la base de données
-    $concert = Concert::create($request->all());
-
-    // Retourner le concert nouvellement créé
-    return response()->json($concert, 201);
-}
-
-
-    public function edit($id)
-    {
-        // Récupérer un concert spécifique par son ID depuis la base de données
-        $concert = Concert::find($id);
-
-        // Afficher le formulaire d'édition du concert
-        return view('concerts.edit', ['concert' => $concert]);
-    }
-
-    public function update(Request $request, $id)
-    {
-        // Valider les données du formulaire
-        $request->validate([
-            'groupe' => 'required',
-            'horaires' => 'required',
-            'scene' => 'required',
-            'descriptif' => 'required',
+        $validator = Validator::make($request->all(), [
+            'Groupe' => 'required|string',
+            'Duree' => 'required|string',
+            'Horaire' => 'required|date',
+            'scene_id' => 'required|exists:scene,id',
+            'Descriptif' => 'required|string'
         ]);
 
-        // Mettre à jour les informations du concert dans la base de données
-        Concert::find($id)->update($request->all());
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
 
-        // Rediriger vers la vue des concerts avec un message de succès
-        return redirect('/concerts')->with('success', 'Concert mis à jour avec succès');
+        $concert = Concert::create($request->all());
+        return response()->json($concert, 201);
     }
 
+    // Edit Concert
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'Groupe' => 'string',
+            'Duree' => 'string',
+            'Horaire' => 'date',
+            'scene_id' => 'exists:scene,id',
+            'Descriptif' => 'string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $concert = Concert::find($id);
+        if (!$concert) {
+            return response()->json(['message' => 'Concert not found'], 404);
+        }
+
+        $concert->update($request->all());
+        return response()->json($concert);
+    }
+
+    // Delete Concert
     public function destroy($id)
     {
-        // Supprimer un concert spécifique par son ID depuis la base de données
-        Concert::destroy($id);
+        $concert = Concert::find($id);
+        if (!$concert) {
+            return response()->json(['message' => 'Concert not found'], 404);
+        }
 
-        // Rediriger vers la vue des concerts avec un message de succès
-        return redirect('/concerts')->with('success', 'Concert supprimé avec succès');
+        $concert->delete();
+        return response()->json(['message' => 'Concert deleted successfully']);
     }
 }
